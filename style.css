@@ -1,2 +1,2 @@
-.grid{width:200px;height:400px;background:#ff0}.grid div{height:20px;widows:20px;background:red}.tetromino{background:blue}
+.grid{width:200px;height:400px;background:#ff0;display:flex;flex-wrap:wrap}.grid div{height:20px;width:20px}.tetromino{background:blue}
 /*# sourceMappingURL=style.css.map */
