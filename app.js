@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerId
     let score = 0
 
+    const colors = [
+        'orange',
+        'purple',
+        'green',
+        'blue',
+        'pink'
+    ]
+
     // check squares
     // console.log(squares)
 
@@ -70,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         current.forEach(index => {
             // console.log(index)
             squares[currentPosition + index].classList.add('tetromino')
+            squares[currentPosition + index].style.backgroundColor = colors[random]
         })
     }
     // draw()
@@ -78,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function undraw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.remove('tetromino')
+            squares[currentPosition + index].style.backgroundColor = ''
         })
     }
     // undraw()
@@ -172,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // show up-next tetromino in mini-grid display
     const displaySquares = document.querySelectorAll('.mini-grid div')
     const displayWidth = 4
-    let displayIndex = 0
+    const displayIndex = 0
 
     // the Tetrominoes without rotations
     const upNextTetrominoes = [
@@ -188,9 +198,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // remove the tetromino inside
         displaySquares.forEach(square => {
             square.classList.remove('tetromino')
+            square.style.backgroundColor = ''
         })
         upNextTetrominoes[nextRandom].forEach(index => {
             displaySquares[displayIndex + index].classList.add('tetromino')
+            displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom]
         })
     }
 
@@ -218,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.forEach(index => {
                     squares[index].classList.remove('taken')
                     squares[index].classList.remove('tetromino')
+                    squares[index].style.backgroundColor = ''
                 })
                 const squaresRemoved = squares.splice(i, width)
                 // console.log(squaresRemoved)
