@@ -60,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // theTetromino[shape][rotation]
     let current = theTetrominoes[random][currentRotation]
     console.log(current)
-
-
+    
     // draw the tetromino
     function draw() {
         current.forEach(index => {
+            console.log(index)
             squares[currentPosition + index].classList.add('tetromino')
         })
     }
@@ -99,5 +99,22 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPosition = 4
             draw()
         }
+    }
+
+    // move left, until no block left
+    function moveLeft() {
+        undraw()
+        // check if on edge, 0 mod 10 or 10 mod 10 = 0
+        const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
+        // if not on edge, go left
+        if(!isAtLeftEdge) currentPosition -=1
+        // now check again
+        // check if the new block is taken
+        if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            // if yes, then go back to last position
+            currentPosition +=1
+        }
+
+        draw()
     }
 })
