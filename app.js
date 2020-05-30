@@ -82,10 +82,16 @@ document.addEventListener('DOMContentLoaded', () => {
     timerId = setInterval(moveDown, 1000)
 
     // assign function to keyboard
-    function control(ev) {
-        console.log(ev.keyCode)
-        if(ev.keyCode === 37) {
+    function control(e) {
+        console.log(e.keyCode)
+        if(e.keyCode === 37) {
             moveLeft()
+        } else if(e.keyCode === 38) {
+            // rotate when press up
+        } else if(e.keyCode === 39) {
+            moveRight()
+        } else if(e.keyCode === 40) {
+            // moveDown()
         }
     }
     document.addEventListener('keyup', control)
@@ -113,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // move left, until no block left
     function moveLeft() {
         undraw()
-        // check if on edge, 0 mod 10 or 10 mod 10 = 0
+        // check if on edge, 0 mod 10 = 0
         const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
         // if not on edge, go left
         if(!isAtLeftEdge) currentPosition -=1
@@ -122,6 +128,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
             // if yes, then go back to last position
             currentPosition +=1
+        }
+        draw()
+    }
+
+    function moveRight() {
+        undraw()
+        // check if on edge, 9 mod 10 = width(10) - 1
+        const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1)
+        // if not on edge, go right
+        if(!isAtRightEdge) currentPosition +=1
+        // now check again
+        // check if the new block is taken
+        if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            // if yes, then go back to last position
+            currentPosition -=1
         }
         draw()
     }
